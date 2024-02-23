@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name = "msEmail")
+@Table(name = "emails")
 public class Email {
 
     @Id
@@ -21,7 +21,16 @@ public class Email {
     private String emailFrom;
     private String emailTo;
     private String subject;
+    @Column(columnDefinition = "TEXT")
     private String text;
     private LocalDateTime sendDateEmail;
     private StatusEmail statusEmail;
+
+    public Email(EmailRequest emailRequest) {
+        this.ownerRef = emailRequest.ownerRef();
+        this.emailFrom = emailRequest.emailFrom();
+        this.emailTo = emailRequest.emailTo();
+        this.subject = emailRequest.subject();
+        this.text = emailRequest.text();
+    }
 }

@@ -32,11 +32,10 @@ public class EmailService {
             message.setSubject(email.getSubject());
             message.setText(email.getText());
             mailSender.send(message);
-            email.setStatusEmail(StatusEmail.PROCESSING);
+            email.setStatusEmail(StatusEmail.SENT);
         }catch (MailException ex){
             email.setStatusEmail(StatusEmail.ERROR);
         }finally {
-            email.setStatusEmail(StatusEmail.SENT);
             return repository.save(email);
         }
     }
