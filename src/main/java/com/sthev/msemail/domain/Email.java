@@ -33,4 +33,5 @@ public class Email {
         this.subject = emailRequest.subject();
         this.text = emailRequest.text();
     }
+
 }
