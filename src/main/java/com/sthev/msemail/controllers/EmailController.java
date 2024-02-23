@@ -8,10 +8,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/emails")
@@ -25,5 +25,14 @@ public class EmailController {
         Email email = new Email(emailRequest);
         emailService.sendEmail(email);
         return new ResponseEntity<>(email, HttpStatus.CREATED);
+    }
+    @GetMapping("/{id}")
+    public Optional<Email> findById(@PathVariable String id){
+        return emailService.findById(id);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Email>> findAllEmails(){
+        return new ResponseEntity<>(this.emailService.findAllEmails(), HttpStatus.OK);
     }
 }
